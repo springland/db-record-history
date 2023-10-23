@@ -1,8 +1,6 @@
-package com.springland365.jpahibernatedbrecordhistory.envers;
+package com.springland365.jpahibernatedbrecordhistory;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,37 +9,32 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
-@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Audited
-public class DepartmentEnvers {
+@MappedSuperclass
+public class AuditableEntity {
+
     @Id
-    Long id ;
+    @GeneratedValue
+    Long id;
 
-    @Column
-    String name ;
-
-    @Column
-    String description ;
+    @Version
+    protected Integer  version ;
 
     @CreatedBy
-    @Column
-    private String createdBy;
+    protected String createdBy;
 
     @CreatedDate
-    @Column
-    private LocalDateTime createdDate;
+    protected LocalDateTime creationDt;
 
     @LastModifiedBy
-    @Column
-    private String lastModifiedBy;
-
+    protected String lastModifiedBy ;
     @LastModifiedDate
-    @Column
-    private LocalDateTime lastModifiedDate;
+    protected LocalDateTime  lastModifiedDt;
+
 }
