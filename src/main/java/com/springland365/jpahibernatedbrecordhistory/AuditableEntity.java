@@ -4,12 +4,12 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.envers.Audited;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
@@ -17,6 +17,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @MappedSuperclass
+@Audited
+@ToString
 public class AuditableEntity {
 
     @Id
@@ -24,7 +26,7 @@ public class AuditableEntity {
     Long id;
 
     @Version
-    protected Integer  version ;
+    protected Integer version;
 
     @CreatedBy
     protected String createdBy;
@@ -33,8 +35,8 @@ public class AuditableEntity {
     protected LocalDateTime creationDt;
 
     @LastModifiedBy
-    protected String lastModifiedBy ;
+    protected String lastModifiedBy;
     @LastModifiedDate
-    protected LocalDateTime  lastModifiedDt;
+    protected LocalDateTime lastModifiedDt;
 
 }

@@ -1,39 +1,36 @@
 package com.springland365.jpahibernatedbrecordhistory.springdataenvers;
 
 import com.springland365.jpahibernatedbrecordhistory.AuditableEntity;
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.envers.Audited;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Audited
-@Entity
 @EntityListeners(AuditingEntityListener.class)
+@ToString
+public class AddressEntity extends AuditableEntity {
 
-public class BookEntity extends AuditableEntity {
+    String street;
 
+    String city ;
+    String state ;
+    String zipCode ;
 
-    @Column
-    String name ;
-
-    @Column
-    String author ;
-
-    @Column
-    String description ;
-
-
+    @OneToMany(mappedBy = "address"  ,cascade= CascadeType.ALL)
+    List<PersonEntity> residents ;
 
 }
