@@ -20,10 +20,17 @@ public class SpringDataEnversApplicationRunner implements ApplicationRunner {
     @Autowired
     AddressRepository addressRepository ;
 
+    @Autowired
+    ProjectRepo projectRepo;
+
+    @Autowired
+    EmployeeRepo employeeRepo ;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
         createBooks();
         createPersonAddress();
+        createEmployeeProject();
     }
 
     protected void createBooks()  throws  Exception{
@@ -39,7 +46,7 @@ public class SpringDataEnversApplicationRunner implements ApplicationRunner {
 
         bookRepository.flush();
 
-        printBookHistory(bookEntity.getId());
+       // printBookHistory(bookEntity.getId());
     }
 
     protected void printBookHistory(Long id) {
@@ -80,7 +87,7 @@ public class SpringDataEnversApplicationRunner implements ApplicationRunner {
         addressRepository.flush();
 
 
-        printAddressHistory(address.getId());
+       // printAddressHistory(address.getId());
     }
 
     protected void printAddressHistory(Long id){
@@ -96,6 +103,40 @@ public class SpringDataEnversApplicationRunner implements ApplicationRunner {
         log.info(address.toString());
 
 
+    }
+
+    protected void createEmployeeProject(){
+        ProjectEntity alpha = new ProjectEntity();
+        alpha.setName("Alpha");
+
+        ProjectEntity beta = new ProjectEntity();
+        beta.setName("Beta") ;
+
+        EmployeeEntity james = new EmployeeEntity();
+        james.setFirstName("James");
+        james.setLastName("Miller");
+
+        EmployeeEntity john = new EmployeeEntity();
+        john.setFirstName(("John"));
+        john.setLastName("Smith");
+
+        alpha.getEmployees().add(james);
+        james.getProjects().add(alpha);
+
+        alpha.getEmployees().add(john);
+        james.getProjects().add(alpha);
+
+
+        john = employeeRepo.save(john);
+
+        james = employeeRepo.save(james);
+
+        beta = projectRepo.save(beta);
+
+        beta.getEmployees().add(james);
+        james.getProjects().add(beta);
+
+        james = employeeRepo.save(james);
     }
 
 }
