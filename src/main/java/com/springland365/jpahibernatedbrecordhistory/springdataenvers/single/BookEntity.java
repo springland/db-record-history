@@ -1,4 +1,4 @@
-package com.springland365.jpahibernatedbrecordhistory.springdataenvers;
+package com.springland365.jpahibernatedbrecordhistory.springdataenvers.single;
 
 import com.springland365.jpahibernatedbrecordhistory.AuditableEntity;
 import jakarta.persistence.*;

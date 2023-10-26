@@ -1,20 +1,18 @@
-package com.springland365.jpahibernatedbrecordhistory.springdataenvers;
+package com.springland365.jpahibernatedbrecordhistory.springdataenvers.manytomany;
 
 import com.springland365.jpahibernatedbrecordhistory.AuditableEntity;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
-import org.hibernate.annotations.Cascade;
 import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Data
@@ -23,27 +21,22 @@ import java.util.Objects;
 @Audited
 @EntityListeners(AuditingEntityListener.class)
 
-public class AddressEntity extends AuditableEntity {
+public class ProjectEntity extends AuditableEntity {
 
-    String street;
+    String name ;
+    String description ;
 
-    String city ;
-    String state ;
-    String zipCode ;
+    @ManyToMany(mappedBy = "projects")
+    Set<EmployeeEntity> employees = new HashSet<>();
 
-    @OneToMany(mappedBy = "address"  ,cascade= CascadeType.ALL)
-    List<PersonEntity> residents ;
-
-
-    public int hashCode()
-    {
+    @Override
+    public int hashCode(){
         return Objects.hash(this.getId() , this.getVersion());
     }
 
-    @Override
     public boolean equals(Object o){
 
-        if(o == null){
+        if( o == null){
             return false ;
         }
 
@@ -55,10 +48,8 @@ public class AddressEntity extends AuditableEntity {
             return false ;
         }
 
-        AddressEntity another = (AddressEntity) o ;
+        ProjectEntity another = (ProjectEntity) o ;
         return Objects.equals(this.getId() , another.getId()) && Objects.equals(this.getVersion() , another.getVersion());
     }
-
-
 
 }

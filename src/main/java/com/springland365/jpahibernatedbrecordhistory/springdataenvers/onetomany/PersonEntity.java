@@ -1,48 +1,58 @@
-package com.springland365.jpahibernatedbrecordhistory.springdataenvers;
+package com.springland365.jpahibernatedbrecordhistory.springdataenvers.onetomany;
 
 import com.springland365.jpahibernatedbrecordhistory.AuditableEntity;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Data
+@Audited
 @NoArgsConstructor
 @AllArgsConstructor
-@Audited
-@EntityListeners(AuditingEntityListener.class)
 
-public class EmployeeEntity extends AuditableEntity {
+@EntityListeners(AuditingEntityListener.class)
+public class PersonEntity extends AuditableEntity {
+
     String firstName ;
 
     String lastName ;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(
-            name = "Employee_Project",
-            joinColumns = { @JoinColumn(name = "employee_id") },
-            inverseJoinColumns = { @JoinColumn(name = "project_id") }
-    )
-    Set<ProjectEntity>  projects = new HashSet<>();
 
+    @ManyToOne
+    AddressEntity address ;
 
-    public int hashCode(){
-        return Objects.hash(this.getId() , this.getVersion());
+    public String toString(){
+
+        StringBuilder builder = new StringBuilder();
+        builder.append(super.toString());
+        builder.append("firstName:" );
+        builder.append(this.firstName);
+        builder.append(" lastName: ");
+        builder.append(this.lastName);
+        return builder.toString();
     }
 
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(this.getId() , this.version);
+    }
+
+    @Override
     public boolean equals(Object o){
         if( o == null){
             return false ;
         }
 
-        if(this == o){
+        if( this == o){
             return true ;
         }
 
@@ -50,7 +60,8 @@ public class EmployeeEntity extends AuditableEntity {
             return false ;
         }
 
-        EmployeeEntity another = (EmployeeEntity) o ;
+        PersonEntity  another = (PersonEntity) o ;
         return Objects.equals(this.getId() , another.getId()) && Objects.equals(this.getVersion() , another.getVersion());
     }
+
 }
