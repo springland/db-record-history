@@ -14,8 +14,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @AllArgsConstructor
 @Audited
 @Entity
-@EntityListeners(AuditableEntityListener.class)
-//@EntityListeners(AuditingEntityListener.class)
+//@EntityListeners(AuditableEntityListener.class)
+@EntityListeners(AuditingEntityListener.class)
 public class BookEntity extends AuditableEntity {
 
 
