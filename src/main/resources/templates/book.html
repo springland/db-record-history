@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<style>
+    table, th, td {
+        border: 1px solid black;
+    }
+</style>
+
+        <h1> Book</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Book Id</th>
+                    <th>Name</th>
+                    <th>Author</th>
+                    <th>Description</th>
+
+                    <th>Revision number</th>
+
+                    <th>Verson </th>
+                    <th> Created By</th>
+                    <th>Created DateTime</th>
+                    <th> Last Modified By</th>
+                    <th> Last Modified DateTime</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="book: ${books}">
+                    <td th:text="${book.id}" />
+                    <td th:text="${book.name}" />
+                    <td th:text="${book.author}" />
+                    <td th:text="${book.description}" />
+                    <td th:text="${book.revisionNumber}" />
+                    <td th:text="${book.version}" />
+                    <td th:text="${book.createdBy}" />
+                    <td th:text="${book.creationDt}" />
+                    <td th:text="${book.lastModifiedBy}" />
+                    <td th:text="${book.lastModifiedDt}" />
+                </tr>
+            </tbody>
+        </table>
+
+
+</html>

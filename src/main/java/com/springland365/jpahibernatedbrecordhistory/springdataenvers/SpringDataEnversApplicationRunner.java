@@ -7,8 +7,8 @@ import com.springland365.jpahibernatedbrecordhistory.springdataenvers.manytomany
 import com.springland365.jpahibernatedbrecordhistory.springdataenvers.onetomany.AddressEntity;
 import com.springland365.jpahibernatedbrecordhistory.springdataenvers.onetomany.AddressRepository;
 import com.springland365.jpahibernatedbrecordhistory.springdataenvers.onetomany.PersonEntity;
-import com.springland365.jpahibernatedbrecordhistory.springdataenvers.single.BookEntity;
-import com.springland365.jpahibernatedbrecordhistory.springdataenvers.single.BookRepository;
+import com.springland365.jpahibernatedbrecordhistory.springdataenvers.simple.BookEntity;
+import com.springland365.jpahibernatedbrecordhistory.springdataenvers.simple.BookRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
