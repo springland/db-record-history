@@ -1,13 +1,8 @@
 package com.springland365.jpahibernatedbrecordhistory.springdataenvers;
 
 
-import com.springland365.jpahibernatedbrecordhistory.AuditableEntity;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
-import org.springframework.data.auditing.AuditingHandler;
-import org.springframework.data.domain.Auditable;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.util.Assert;
 
 import java.time.LocalDateTime;
 

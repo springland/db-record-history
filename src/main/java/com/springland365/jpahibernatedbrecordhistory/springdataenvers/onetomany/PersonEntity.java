@@ -1,6 +1,6 @@
 package com.springland365.jpahibernatedbrecordhistory.springdataenvers.onetomany;
 
-import com.springland365.jpahibernatedbrecordhistory.AuditableEntity;
+import com.springland365.jpahibernatedbrecordhistory.springdataenvers.AuditableEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.ManyToOne;

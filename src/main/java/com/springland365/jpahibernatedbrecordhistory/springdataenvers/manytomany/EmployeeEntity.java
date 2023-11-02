@@ -1,6 +1,6 @@
 package com.springland365.jpahibernatedbrecordhistory.springdataenvers.manytomany;
 
-import com.springland365.jpahibernatedbrecordhistory.AuditableEntity;
+import com.springland365.jpahibernatedbrecordhistory.springdataenvers.AuditableEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

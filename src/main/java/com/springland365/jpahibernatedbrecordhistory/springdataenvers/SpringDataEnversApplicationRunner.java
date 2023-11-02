@@ -23,8 +23,6 @@ import java.util.List;
 @Component
 @Slf4j
 public class SpringDataEnversApplicationRunner implements ApplicationRunner {
-    @Autowired
-    BookRepository bookRepository ;
 
     @Autowired
     AddressRepository addressRepository ;
@@ -37,40 +35,11 @@ public class SpringDataEnversApplicationRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        createBooks();
         createPersonAddress();
         createEmployeeProject();
     }
 
-    protected void createBooks()  throws  Exception{
-        BookEntity bookEntity = new BookEntity();
-        bookEntity.setName("Effective Java");
-        bookEntity.setAuthor("Joshua Bloch");
-        bookEntity.setDescription("Version 1");
-        bookEntity = bookRepository.save(bookEntity);
 
-        Thread.sleep(2000);
-        bookEntity.setDescription("Version 2");
-        bookEntity = bookRepository.save(bookEntity);
-
-        bookRepository.flush();
-
-       // printBookHistory(bookEntity.getId());
-    }
-
-    protected void printBookHistory(Long id) {
-        Revisions<Integer, BookEntity> revisions = bookRepository.findRevisions(id);
-
-        revisions.stream().forEach(
-                rev -> {
-                    BookEntity  bookEntity = rev.getEntity();
-                    log.info(bookEntity.toString());
-
-                }
-
-        );
-
-    }
     protected void createPersonAddress() throws Exception {
         AddressEntity address = new AddressEntity();
         address.setCity("New York");

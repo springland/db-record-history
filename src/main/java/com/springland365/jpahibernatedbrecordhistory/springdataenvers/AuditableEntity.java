@@ -1,10 +1,11 @@
-package com.springland365.jpahibernatedbrecordhistory;
+package com.springland365.jpahibernatedbrecordhistory.springdataenvers;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
 import org.hibernate.envers.Audited;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -19,6 +20,7 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @Audited
 @ToString
+
 public class AuditableEntity {
 
     @Id
@@ -27,6 +29,8 @@ public class AuditableEntity {
 
     @Version
     protected Integer version;
+
+
 
     @CreatedBy
     protected String createdBy;

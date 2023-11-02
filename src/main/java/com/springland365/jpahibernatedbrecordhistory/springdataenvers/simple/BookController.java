@@ -1,4 +1,4 @@
-package com.springland365.jpahibernatedbrecordhistory.springdataenvers;
+package com.springland365.jpahibernatedbrecordhistory.springdataenvers.simple;
 
 import com.springland365.jpahibernatedbrecordhistory.springdataenvers.simple.BookEntity;
 import com.springland365.jpahibernatedbrecordhistory.springdataenvers.simple.BookRepository;
@@ -10,7 +10,6 @@ import org.springframework.data.history.Revisions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -18,12 +17,12 @@ import java.util.stream.Collectors;
 
 @Controller
 //@RequestMapping("/springdataenvers")
-public class SpringDataEnversWebController {
+public class BookController {
 
     @Autowired
     BookRepository  bookRepository;
 
-    ModelMapper  modelMapper = new ModelMapper();
+
 
     @GetMapping("/web/springdataenvers/book")
     public String book(Model  model){
@@ -70,16 +69,6 @@ public class SpringDataEnversWebController {
         BookRevisionDTO bookRevisionDTO = modelMapper.map(bookRevision.getEntity() , BookRevisionDTO.class);
         bookRevisionDTO.setRevisionNumber(bookRevision.getRevisionNumber().orElse(null));
         return bookRevisionDTO ;
-    }
-    @GetMapping("/address-person")
-    public String addressPerson(Model model){
-        return "address-person";
-    }
-
-    @GetMapping("/employee-project")
-    public String employeeProject(Model model){
-
-        return "employee-project";
     }
 
 }
