@@ -15,7 +15,12 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @AllArgsConstructor
 @Audited
 @Entity
-
+@SQLDelete(
+      sql= """
+            update BOOK_ENTITY set deleted = true where id = ? and version = ? 
+        """
+)
+@Where( clause =  " deleted = false")
 //@EntityListeners(AuditableEntityListener.class)
 @EntityListeners(AuditingEntityListener.class)
 public class BookEntity extends AuditableEntity {
