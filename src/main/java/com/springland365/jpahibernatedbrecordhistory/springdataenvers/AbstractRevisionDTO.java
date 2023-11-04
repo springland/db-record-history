@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import org.springframework.data.history.RevisionMetadata.RevisionType;
+
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -12,9 +14,11 @@ import java.util.Optional;
 @NoArgsConstructor
 @AllArgsConstructor
 public abstract class AbstractRevisionDTO {
-    Integer revisionNumber  ;
+    protected Integer revisionNumber  ;
 
-    Long id;
+    protected RevisionType revisionType ;
+
+    protected Long id;
 
     protected Integer version;
 
