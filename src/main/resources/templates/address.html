@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+        <style>
+            table, th, td {
+                border: 1px solid black;
+            }
+
+            div.address {
+              padding: 25px;
+            }
+            div.residence {
+              padding: 15px;
+            }
+
+        </style>
+        <a href="/">Home</a>
+        <h1> Address person</h1>
+
+
+        <th:block th:each="addrrevs : ${addresses}" >
+
+                <div>
+                        <th:block th:each="addrrev : ${addrrevs}">
+
+                                <div class="address">
+                                        <table>
+                                                <thead>
+                                                        <tr>
+                                                                <th>Id</th>
+                                                                <th>Street</th>
+                                                                <th>City</th>
+                                                                <th>State</th>
+                                                                <th>ZipCode</th>
+                                                                <th>Revision number</th>
+                                                                <th>Revision Type</th>
+
+                                                                <th> Created By</th>
+                                                                <th>Created DateTime</th>
+                                                                <th> Last Modified By</th>
+                                                                <th> Last Modified DateTime</th>
+
+
+                                                        </tr>
+                                                </thead>
+                                                <tbody>
+                                                        <tr>
+                                                                <td th:text="${addrrev.id}" />
+                                                                <td th:text="${addrrev.street}" />
+                                                                <td th:text="${addrrev.city}" />
+                                                                <td th:text="${addrrev.state}" />
+                                                                <td th:text="${addrrev.zipcode}" />
+                                                                <td th:text="${addrrev.revisionNumber}" />
+                                                                <td th:text="${addrrev.revisionType}" />
+                                                                <td th:text="${addrrev.createdBy}" />
+                                                                <td th:text="${addrrev.creationDt}" />
+                                                                <td th:text="${addrrev.lastModifiedBy}" />
+                                                                <td th:text="${addrrev.lastModifiedDt}" />
+
+                                                        </tr>
+                                                </tbody>
+                                        </table>
+                                        <div class="residence">
+                                                <table>
+                                                        <thead>
+                                                                <tr>
+                                                                        <th>Id</th>
+                                                                        <th>FirstName</th>
+                                                                        <th>LastName</th>
+                                                                        <th>Revision number</th>
+                                                                        <th>Revision Type</th>
+
+                                                                        <th> Created By</th>
+                                                                        <th>Created DateTime</th>
+                                                                        <th> Last Modified By</th>
+                                                                        <th> Last Modified DateTime</th>
+
+                                                                </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                                <tr th:each="person : ${addrrev.residents}">
+                                                                        <td th:text="${person.id}" />
+                                                                        <td th:text="${person.firstName}" />
+                                                                        <td th:text="${person.lastName}" />
+                                                                        <td th:text="${person.revisionNumber}" />
+                                                                        <td th:text="${person.revisionType}" />
+                                                                        <td th:text="${person.createdBy}" />
+                                                                        <td th:text="${person.creationDt}" />
+                                                                        <td th:text="${person.lastModifiedBy}" />
+                                                                        <td th:text="${person.lastModifiedDt}" />
+
+                                                                </tr>
+                                                        </tbody>
+
+                                                </table>
+                                         </div>
+                                </div>
+                        </th:block>
+                </div>
+
+        </th:block>
+
+</html>

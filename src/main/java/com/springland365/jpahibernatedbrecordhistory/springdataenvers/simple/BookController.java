@@ -8,6 +8,7 @@ import org.springframework.data.history.Revisions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.ZoneId;
@@ -24,33 +25,22 @@ public class BookController {
 
 
 
-    @GetMapping("/web/springdataenvers/books")
-    public String book(Model  model){
+    @GetMapping("/web/springdataenvers/books/{includeDeleted}")
+    public String findAllBooksRevisionHistory(@PathVariable boolean includeDeleted ,  Model  model){
 
 
-        List<List<BookRevisionDTO>> listOfBookRevisionList = getAllBooks(false) ;
-
-        model.addAttribute("books" , listOfBookRevisionList);
-
-
-        return "book";
-    }
-
-    @GetMapping("/web/springdataenvers/booksincludedeleted")
-    public String booksIncludeDeleted(Model  model){
-
-
-        List<List<BookRevisionDTO>> listOfBookRevisionList = getAllBooks(true) ;
+        List<List<BookRevisionDTO>> listOfBookRevisionList = getAllBooksRevisionHistory(includeDeleted) ;
 
         model.addAttribute("books" , listOfBookRevisionList);
 
 
         return "book";
     }
+
 
 
     @ResponseBody
-    public List<List<BookRevisionDTO>> getAllBooks(boolean includeDeleted) {
+    public List<List<BookRevisionDTO>> getAllBooksRevisionHistory(boolean includeDeleted) {
         List<BookEntity>  bookEntities ;
         if(includeDeleted){
             bookEntities = bookRepository.selectAllBooksNativeIncludeDeleted();

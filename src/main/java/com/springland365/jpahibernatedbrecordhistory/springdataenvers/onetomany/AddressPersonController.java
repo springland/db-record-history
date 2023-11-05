@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Collections;
@@ -21,29 +22,38 @@ public class AddressPersonController {
     AddressRepository  repository ;
 
 
-    @GetMapping("/web/springdataenvers/address-person")
-    public String addressPerson(Model model){
-        List<AddressRevisionDTO> addressRevisionDTOList = getAddressRevisionHistory() ;
+    @GetMapping("/web/springdataenvers/addresses/{includeDeleted}")
+    public String findAllAddressRevisionHistory(@PathVariable boolean includeDeleted  , Model model){
+        List<List<AddressRevisionDTO>> addressRevisionDTOList = getAddressRevisionHistory(includeDeleted) ;
         model.addAttribute("addresses" , addressRevisionDTOList);
 
-        return "address-person";
+        return "address";
     }
 
     @GetMapping("/api/springdataenvers/address-person")
     @ResponseBody
-    public List<AddressRevisionDTO>  addressPerson() {
+    public List<List<AddressRevisionDTO>>  addressPerson() {
 
-        List<AddressRevisionDTO> addressRevisionDTOList = getAddressRevisionHistory() ;
+        List<List<AddressRevisionDTO>> addressRevisionDTOList = getAddressRevisionHistory(false) ;
         return addressRevisionDTOList;
 
     }
 
-    protected List<AddressRevisionDTO> getAddressRevisionHistory() {
+    protected List<List<AddressRevisionDTO>> getAddressRevisionHistory(boolean includeDeleted) {
 
-        List<AddressEntity> addressEntities = repository.findAll();
+        List<AddressEntity> addressEntities;
+
+        if(includeDeleted){
+
+            addressEntities = repository.selectAllAddressNativeIncludeDeleted();
+        }
+        else{
+                addressEntities = repository.findAll();
+        }
 
 
-        return addressEntities.stream().flatMap( addr -> getAddressRevisionHistory(addr).stream()).collect(Collectors.toList());
+
+        return addressEntities.stream().map( addr -> getAddressRevisionHistory(addr)).collect(Collectors.toList());
 
 
 
@@ -52,7 +62,10 @@ public class AddressPersonController {
     protected List<AddressRevisionDTO>  getAddressRevisionHistory(AddressEntity address) {
         Revisions<  Integer , AddressEntity> revisions = repository.findRevisions(address.getId());
 
-        return revisions.stream().map( rev -> toAddressRevisionDTO(rev)).collect(Collectors.toList());
+        List<AddressRevisionDTO> addressRevisions =  revisions.stream().map( rev -> toAddressRevisionDTO(rev)).collect(Collectors.toList());
+        Collections.reverse(addressRevisions);
+
+        return addressRevisions ;
 
     }
 
@@ -61,8 +74,18 @@ public class AddressPersonController {
         ModelMapper  modelMapper = new ModelMapper();
         AddressRevisionDTO  dto = modelMapper.map(revision.getEntity() , AddressRevisionDTO.class);
 
-        List<PersonRevisionDTO> personRevisionDTOS = revision.getEntity().getResidents().stream().map( r -> modelMapper.map(r , PersonRevisionDTO.class)).collect(Collectors.toList());
+        List<PersonRevisionDTO> personRevisionDTOS = revision.getEntity().getResidents().stream().map( r -> {
+            PersonRevisionDTO personRevisionDTO = modelMapper.map(r , PersonRevisionDTO.class);
+            personRevisionDTO.setRevisionNumber(revision.getRevisionNumber().orElse(null));
+            personRevisionDTO.setRevisionType(revision.getMetadata().getRevisionType());
+            return personRevisionDTO ;
+        }).collect(Collectors.toList());
+
+        Collections.reverse(personRevisionDTOS);
+
         dto.setResidents(personRevisionDTOS);
+        dto.setRevisionNumber(revision.getRevisionNumber().orElse(null));
+        dto.setRevisionType(revision.getMetadata().getRevisionType());
         return dto ;
 
 

@@ -12,7 +12,7 @@ public class AddressRevisionDTO extends AbstractRevisionDTO {
 
     String city ;
     String state ;
-    String zipCode ;
+    String zipcode ;
 
     List<PersonRevisionDTO> residents  ;
 }
