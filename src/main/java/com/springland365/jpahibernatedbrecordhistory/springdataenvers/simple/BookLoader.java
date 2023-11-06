@@ -6,7 +6,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BookLoadRunner implements ApplicationRunner {
+public class BookLoader implements ApplicationRunner {
 
     @Autowired
     BookRepository bookRepository ;

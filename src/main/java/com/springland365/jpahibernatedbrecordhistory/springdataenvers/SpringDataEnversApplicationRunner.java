@@ -24,8 +24,6 @@ import java.util.List;
 @Slf4j
 public class SpringDataEnversApplicationRunner implements ApplicationRunner {
 
-    @Autowired
-    AddressRepository addressRepository ;
 
     @Autowired
     ProjectRepo projectRepo;
@@ -35,53 +33,11 @@ public class SpringDataEnversApplicationRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        createPersonAddress();
         createEmployeeProject();
     }
 
 
-    protected void createPersonAddress() throws Exception {
-        AddressEntity address = new AddressEntity();
-        address.setCity("New York");
-        address.setState("NY");
-        address.setZipCode("10172");
-        address.setStreet("277 Park Ave");
 
-        PersonEntity john = new PersonEntity("John" , "Doe" , address);
-
-        List<PersonEntity>  residences = List.of(
-                john
-        );
-        address.setResidents(residences);
-        address = addressRepository.save(address);
-
-        residences = new ArrayList<>();
-        PersonEntity jane = new PersonEntity("Jane" , "Doe" , address);
-        residences.addAll(address.getResidents());
-        residences.add(jane);
-        address.setResidents(residences);
-        address = addressRepository.save(address);
-
-        addressRepository.flush();
-
-
-       // printAddressHistory(address.getId());
-    }
-
-    protected void printAddressHistory(Long id){
-        Revisions<  Integer , AddressEntity> revisions= addressRepository.findRevisions(id);
-        revisions.stream().forEach(
-                rev -> printAddressRevision(rev.getMetadata() , rev.getEntity())
-        );
-
-    }
-
-    protected void printAddressRevision(RevisionMetadata<Integer> revisionMetadata , AddressEntity address){
-        log.info(revisionMetadata.toString());
-        log.info(address.toString());
-
-
-    }
 
     protected void createEmployeeProject(){
         ProjectEntity alpha = new ProjectEntity();

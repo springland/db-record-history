@@ -24,6 +24,8 @@ public abstract class AbstractRevisionDTO {
 
     protected String createdBy;
 
+    protected String desc ;
+
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     protected LocalDateTime creationDt;
 

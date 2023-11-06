@@ -31,6 +31,8 @@ public class AuditableEntity {
     protected Integer version;
 
 
+    @Column
+    protected String desc ;
 
     @CreatedBy
     protected String createdBy;
