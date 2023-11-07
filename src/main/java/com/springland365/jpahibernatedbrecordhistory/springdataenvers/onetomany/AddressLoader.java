@@ -22,6 +22,7 @@ public class AddressLoader implements ApplicationRunner {
         addResidence();
         removeResidence() ;
         changeAddress();
+        deleteAddress();
     }
 
     protected void addResidence() throws Exception {
@@ -127,5 +128,28 @@ public class AddressLoader implements ApplicationRunner {
         addressRepository.save(park280);
 
 
+    }
+
+    protected void deleteAddress() throws Exception {
+
+        AddressEntity park301 = new AddressEntity();
+        park301.setCity("New York");
+        park301.setState("NY");
+        park301.setZipCode("10022");
+        park301.setStreet("301 Park Ave");
+        park301.setDesc("Delete address");
+
+        PersonEntity jimmy = new PersonEntity();
+        jimmy.setFirstName("Jimmy");
+        jimmy.setLastName("Davis");
+
+        jimmy.setAddress(park301);
+        park301.setResidents(List.of(jimmy));
+
+        addressRepository.save(park301);
+
+        Thread.sleep(500);
+
+        addressRepository.delete(park301);
     }
 }

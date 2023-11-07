@@ -19,7 +19,7 @@
 
 
         <th:block th:each="addrrevs : ${addresses}" >
-                <h2 th:text="${addrrevs[0].desc}"> </h2>
+                <h2 th:text="${addrrevs[0].desc != null} ? ${addrrevs[0].desc}:${addrrevs[1].desc}"> </h2>
                 <div>
                         <th:block th:each="addrrev : ${addrrevs}">
 

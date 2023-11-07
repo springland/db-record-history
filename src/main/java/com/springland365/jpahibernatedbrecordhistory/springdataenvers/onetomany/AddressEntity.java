@@ -1,13 +1,12 @@
 package com.springland365.jpahibernatedbrecordhistory.springdataenvers.onetomany;
 
 import com.springland365.jpahibernatedbrecordhistory.springdataenvers.AuditableEntity;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -20,6 +19,12 @@ import java.util.Objects;
 @AllArgsConstructor
 @Audited
 @EntityListeners(AuditingEntityListener.class)
+@SQLDelete(
+        sql= """
+            update ADDRESS_ENTITY set deleted = true where id = ? and version = ? 
+        """
+)
+@Where( clause =  " deleted = false")
 
 public class AddressEntity extends AuditableEntity {
 
@@ -28,6 +33,9 @@ public class AddressEntity extends AuditableEntity {
     String city ;
     String state ;
     String zipCode ;
+
+    @Column
+    boolean deleted ;
 
     @OneToMany(mappedBy = "address"  ,cascade= CascadeType.ALL)
     List<PersonEntity> residents ;
