@@ -103,17 +103,28 @@ public class AddressLoader implements ApplicationRunner {
         james.setAddress(park299);
         park299.setResidents(List.of(james));
 
+
+        PersonEntity  patrick = new PersonEntity();
+        patrick.setFirstName("Patrick");
+        patrick.setLastName("Brown");
+        patrick.setAddress(park299);
+        park299.setResidents(List.of(patrick, james));
+
         addressRepository.save(park299);
         addressRepository.save(park280);
 
         Thread.sleep(500);
 
-        park299.setResidents(Collections.EMPTY_LIST);
+        // move james to 280
+
+        List<PersonEntity> residents = new ArrayList<>();
+        residents.addAll(park299.residents);
+        residents.remove(james);
+        park299.setResidents(residents);
         park280.setResidents(List.of(james));
         james.setAddress(park280);
         addressRepository.save(park299);
         addressRepository.save(park280);
-        //personRepository.save(james);
 
 
     }
