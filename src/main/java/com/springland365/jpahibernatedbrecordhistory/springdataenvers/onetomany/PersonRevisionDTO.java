@@ -10,5 +10,6 @@ public class PersonRevisionDTO extends AbstractRevisionDTO {
 
     String lastName ;
 
+    AddressRevisionDTO  address ;
 
 }

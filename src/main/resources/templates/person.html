@@ -1,0 +1,99 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        div.address {
+            padding: 25px;
+        }
+        div.person {
+            padding: 15px;
+        }
+
+    </style>
+
+    <a href="/">Home</a>
+    <h1> Person </h1>
+
+    <th:block th:each="presonrevs : ${personrevslist}" >
+        <div class="person">
+            <h2 th:text="${presonrevs[0].firstName} != null ?  ${presonrevs[0].firstName} + ' ' +${presonrevs[0].lastName}:${presonrevs[1].firstName} + ' ' +${presonrevs[1].lastName}"> </h2>
+            <th:block th:each="personrev : ${presonrevs}">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>FirstName</th>
+                            <th>LastName</th>
+                            <th>Revision number</th>
+                            <th>Revision Type</th>
+
+                            <th> Created By</th>
+                            <th>Created DateTime</th>
+                            <th> Last Modified By</th>
+                            <th> Last Modified DateTime</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr >
+                            <td th:text = "${personrev.id}"></td>
+                            <td th:text = "${personrev.firstName}"></td>
+                            <td th:text = "${personrev.lastName}"></td>
+                            <td th:text = "${personrev.revisionNumber}"></td>
+                            <td th:text = "${personrev.revisionType}"></td>
+                            <td th:text = "${personrev.createdBy}"></td>
+                            <td th:text = "${personrev.creationDt}"></td>
+                            <td th:text = "${personrev.lastModifiedBy}"></td>
+                            <td th:text = "${personrev.lastModifiedDt}"></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <span th:if = "${personrev.address != null}">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Street</th>
+                                <th>City</th>
+                                <th>State</th>
+                                <th>ZipCode</th>
+                                <th>Description</th>
+                                <th>Revision number</th>
+                                <th>Revision Type</th>
+
+                                <th> Created By</th>
+                                <th>Created DateTime</th>
+                                <th> Last Modified By</th>
+                                <th> Last Modified DateTime</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                    <td th:text="${personrev.address.id}" />
+                                    <td th:text="${personrev.address.street}" />
+                                    <td th:text="${personrev.address.city}" />
+                                    <td th:text="${personrev.address.state}" />
+                                    <td th:text="${personrev.address.zipcode}" />
+                                    <td th:text="${personrev.address.desc}" />
+                                    <td th:text="${personrev.address.revisionNumber}" />
+                                    <td th:text="${personrev.address.revisionType}" />
+                                    <td th:text="${personrev.address.createdBy}" />
+                                    <td th:text="${personrev.address.creationDt}" />
+                                    <td th:text="${personrev.address.lastModifiedBy}" />
+                                    <td th:text="${personrev.address.lastModifiedDt}" />
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </span>
+                <div class="address">
+
+
+                </div>
+            </th:block>
+        </div>
+    </th:block>
+</html>
