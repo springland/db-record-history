@@ -1,0 +1,97 @@
+<html>
+
+<style>
+    table, th, td {
+        border: 1px solid black;
+    }
+
+    div.project {
+        padding: 25px;
+    }
+    div.team {
+        padding: 15px;
+    }
+
+</style>
+
+    <a href="/">Home</a>
+
+    <h1> Project</h1>
+
+    <th:block th:each="projectrevs : ${projectrevslist}" >
+        <div class="project">
+            <h2 th:text="${projectrevs[0].name} != null ?  ${projectrevs[0].name}:${projectrevs[1].name}"> </h2>
+            <th:block th:each = "projectrev : ${projectrevs}">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Revision number</th>
+                            <th>Revision Type</th>
+
+                            <th> Created By</th>
+                            <th>Created DateTime</th>
+                            <th> Last Modified By</th>
+                            <th> Last Modified DateTime</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td th:text="${projectrev.id}"></td>
+                            <td th:text="${projectrev.name}"></td>
+                            <td th:text="${projectrev.description}"></td>
+                            <td th:text="${projectrev.revisionNumber}"></td>
+                            <td th:text="${projectrev.revisionType}"></td>
+                            <td th:text="${projectrev.createdBy}"></td>
+                            <td th:text="${projectrev.creationDt}"></td>
+                            <td th:text="${projectrev.lastModifiedBy}"></td>
+                            <td th:text="${projectrev.lastModifiedDt}"></td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="team">
+                    <h2> Team members</h2>
+
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>FirstName</th>
+                            <th>LastName</th>
+                            <th>Revision number</th>
+                            <th>Revision Type</th>
+
+                            <th> Created By</th>
+                            <th>Created DateTime</th>
+                            <th> Last Modified By</th>
+                            <th> Last Modified DateTime</th>
+                        </tr>
+
+                        </thead>
+                        <tbody>
+                        <tr th:each="employee : ${projectrev.team}">
+                            <td th:text="${employee.id}" />
+                            <td th:text="${employee.firstName}" />
+                            <td th:text="${employee.lastName}" />
+                            <td th:text="${employee.revisionNumber}" />
+                            <td th:text="${employee.revisionType}" />
+                            <td th:text="${employee.createdBy}" />
+                            <td th:text="${employee.creationDt}" />
+                            <td th:text="${employee.lastModifiedBy}" />
+                            <td th:text="${employee.lastModifiedDt}" />
+
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </th:block>
+        </div>
+    </th:block>
+</html>

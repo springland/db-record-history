@@ -1,6 +1,7 @@
 package com.springland365.jpahibernatedbrecordhistory.springdataenvers.manytomany;
 
 import com.springland365.jpahibernatedbrecordhistory.springdataenvers.AuditableEntity;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.ManyToMany;
@@ -26,7 +27,7 @@ public class ProjectEntity extends AuditableEntity {
     String name ;
     String description ;
 
-    @ManyToMany(mappedBy = "projects")
+    @ManyToMany(mappedBy = "projects" , cascade = CascadeType.ALL)
     Set<EmployeeEntity> employees = new HashSet<>();
 
     @Override

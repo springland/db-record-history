@@ -33,7 +33,7 @@ public class SpringDataEnversApplicationRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        createEmployeeProject();
+        //createEmployeeProject();
     }
 
 
