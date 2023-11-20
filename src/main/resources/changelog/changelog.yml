@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: ./springdataenverssimple.yml
+      relativeToChangelogFile: true
+  - include:
+      file: ./springdataenversonetomany.yml
+      relativeToChangelogFile: true

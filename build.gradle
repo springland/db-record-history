@@ -29,7 +29,7 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.modelmapper/modelmapper
 	implementation 'org.modelmapper:modelmapper:3.0.0'
 
-
+	implementation 'org.liquibase:liquibase-core'
 	implementation 'org.hibernate:hibernate-envers:6.3.1.Final'
 
 	compileOnly 'org.projectlombok:lombok'

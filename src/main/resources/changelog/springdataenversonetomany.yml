@@ -1,0 +1,97 @@
+databaseChangeLog:
+  -  changeSet:
+       id:  2
+       author:  springland
+       changes:
+         -  createTable:
+              tableName:  tbl_address
+              columns:
+                -  column:
+                     name:  id
+                     type:  long
+                     autoIncrement:  true
+                     constraints:
+                       primaryKey:  true
+                       nullable:  false
+                -  column:
+                     name:  street
+                     type:  varchar(50)
+                -  column:
+                     name:  city
+                     type:  varchar(100)
+                -  column:
+                     name:  state
+                     type:  varchar(10)
+                -  column:
+                     name:  zip_code
+                     type:  varchar(10)
+                -  column:
+                     name:  version
+                     type:  int
+                -  column:
+                     name:  deleted
+                     type:  bool
+                -  column:
+                     name:  createdBy
+                     type:  varchar(100)
+                -  column:
+                     name:  creation_dt
+                     type:  datetime
+                -  column:
+                     name:  created_by
+                     type:  varchar(100)
+
+                -  column:
+                     name:  last_modified_by
+                     type:  varchar(100)
+
+                -  column:
+                     name:  last_modified_dt
+                     type:  datetime
+
+
+         -  createTable:
+              tableName:  tbl_person
+              columns:
+                -  column:
+                     name:  id
+                     type:  long
+                     autoIncrement:  true
+                     constraints:
+                       primaryKey:  true
+                       nullable:  false
+                -  column:
+                     name:  street
+                     type:  varchar(50)
+                -  column:
+                     name:  city
+                     type:  varchar(100)
+                -  column:
+                     name:  state
+                     type:  varchar(10)
+                -  column:
+                     name:  zip_code
+                     type:  varchar(10)
+                -  column:
+                     name:  version
+                     type:  int
+                -  column:
+                     name:  deleted
+                     type:  bool
+                -  column:
+                     name:  createdBy
+                     type:  varchar(100)
+                -  column:
+                     name:  creation_dt
+                     type:  datetime
+                -  column:
+                     name:  created_by
+                     type:  varchar(100)
+
+                -  column:
+                     name:  last_modified_by
+                     type:  varchar(100)
+
+                -  column:
+                     name:  last_modified_dt
+                     type:  datetime
