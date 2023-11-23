@@ -1,6 +1,6 @@
 databaseChangeLog:
   -  changeSet:
-       id:  2
+       id:  onetomany
        author:  springland
        changes:
          -  createTable:
@@ -60,6 +60,10 @@ databaseChangeLog:
                      constraints:
                        primaryKey:  true
                        nullable:  false
+                -  column:
+                     name:  address_id
+                     type:  long
+
                 -  column:
                      name:  street
                      type:  varchar(50)

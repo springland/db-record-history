@@ -1,7 +1,13 @@
 databaseChangeLog:
   - include:
-      file: ./springdataenverssimple.yml
+      file: ./department.yml
       relativeToChangelogFile: true
   - include:
-      file: ./springdataenversonetomany.yml
+      file: ./springdataenverssimple.yml
       relativeToChangelogFile: true
+#  - include:
+#      file: ./springdataenversonetomany.yml
+#      relativeToChangelogFile: true
+#  - include:
+#      file: ./springdataenversmanytomany.yml
+#      relativeToChangelogFile: true

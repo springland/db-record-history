@@ -9,7 +9,7 @@ import java.util.List;
 public interface AddressRepository extends JpaRepository<AddressEntity , Long> , RevisionRepository<AddressEntity , Long , Integer> {
 
     @Query(
-            value = "SELECT * from ADDRESS_ENTITY" , nativeQuery = true
+            value = "SELECT * from tbl_address" , nativeQuery = true
     )
     public List<AddressEntity> selectAllAddressNativeIncludeDeleted() ;
 }

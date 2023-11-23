@@ -35,14 +35,19 @@ public class AuditableEntity {
     protected String desc ;
 
     @CreatedBy
+    @Column(name = "creation_by")
     protected String createdBy;
 
     @CreatedDate
+    @Column(name = "creation_dt")
     protected LocalDateTime creationDt;
 
     @LastModifiedBy
+    @Column(name = "last_modified_by")
     protected String lastModifiedBy;
     @LastModifiedDate
+
+    @Column(name = "last_modified_dt")
     protected LocalDateTime lastModifiedDt;
 
 }

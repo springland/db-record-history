@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
+import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -14,10 +15,12 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @NoArgsConstructor
 @AllArgsConstructor
 @Audited
+@AuditTable( value = "tbl_book_audit" )
 @Entity
+@Table(name="tbl_book")
 @SQLDelete(
       sql= """
-            update BOOK_ENTITY set deleted = true where id = ? and version = ? 
+            update tbl_book set deleted = true where id = ? and version = ? 
         """
 )
 @Where( clause =  " deleted = false")

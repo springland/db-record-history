@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
+import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -14,6 +15,8 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name="tbl_address")
+@AuditTable(value = "tbl_address_audit")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,7 +24,7 @@ import java.util.Objects;
 @EntityListeners(AuditingEntityListener.class)
 @SQLDelete(
         sql= """
-            update ADDRESS_ENTITY set deleted = true where id = ? and version = ? 
+            update tbl_address set deleted = true where id = ? and version = ? 
         """
 )
 @Where( clause =  " deleted = false")

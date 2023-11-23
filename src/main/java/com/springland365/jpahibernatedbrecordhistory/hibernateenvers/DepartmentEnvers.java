@@ -3,6 +3,7 @@ package com.springland365.jpahibernatedbrecordhistory.hibernateenvers;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,18 +16,19 @@ import org.springframework.data.annotation.LastModifiedDate;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "tbl_department")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Audited
 public class DepartmentEnvers {
     @Id
+
     Long id ;
 
-    @Column
+    @Column(name = "name")
     String name ;
 
-    @Column
+    @Column(name = "description")
     String description ;
 
     @CreatedBy

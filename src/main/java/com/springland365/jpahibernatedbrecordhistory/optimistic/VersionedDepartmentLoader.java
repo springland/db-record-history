@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class VersionedDepartmentApplicationRunner implements ApplicationRunner {
+public class VersionedDepartmentLoader implements ApplicationRunner {
 
     @Autowired
     VersionedDepartmentRepo repo ;

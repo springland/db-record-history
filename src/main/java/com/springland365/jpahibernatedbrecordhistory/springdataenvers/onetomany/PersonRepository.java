@@ -10,7 +10,7 @@ public interface PersonRepository extends JpaRepository<PersonEntity , Long> , R
 
 
     @Query(
-            value = "SELECT * from PERSON_ENTITY" , nativeQuery = true
+            value = "SELECT * from tbl_person" , nativeQuery = true
     )
     List<PersonEntity> selectAllNativeIncludeDeleted();
 }

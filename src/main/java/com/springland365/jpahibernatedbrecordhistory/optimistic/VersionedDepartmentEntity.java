@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
+@Table(name = "tbl_versioned_department")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

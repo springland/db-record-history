@@ -11,6 +11,6 @@ public interface BookRepository extends JpaRepository<BookEntity , Long> , Revis
 //    @Modifying
 //    @Query("SELECT b from BookEntity b where b.deleted = true or b.deleted = false")
 
-    @Query(value = "SELECT * from BOOK_ENTITY ", nativeQuery = true)
+    @Query(value = "SELECT * from tbl_book ", nativeQuery = true)
     List<BookEntity> selectAllBooksNativeIncludeDeleted() ;
 }

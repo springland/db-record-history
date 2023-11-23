@@ -4,17 +4,21 @@ import com.springland365.jpahibernatedbrecordhistory.springdataenvers.AuditableE
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Objects;
 
 @Entity
+@Table(name="tbl_person")
 @Data
 @Audited
+@AuditTable(value = "tbl_person_audit")
 @NoArgsConstructor
 @AllArgsConstructor
 

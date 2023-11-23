@@ -1,10 +1,47 @@
 databaseChangeLog:
   -  changeSet:
-       id:  simple
+       id:  manytomany
        author:  springland
        changes:
          -  createTable:
-              tableName:  tbl_book
+              tableName:  tbl_project
+              columns:
+                -  column:
+                     name:  id
+                     type:  long
+                     autoIncrement:  true
+                     constraints:
+                       primaryKey:  true
+                       nullable:  false
+
+                -  column:
+                     name:  version
+                     type:  int
+
+                -  column:
+                     name:  deleted
+                     type:  bool
+                -  column:
+                     name:  createdBy
+                     type:  varchar(100)
+                -  column:
+                     name:  creation_dt
+                     type:  datetime
+                -  column:
+                     name:  created_by
+                     type:  varchar(100)
+
+                -  column:
+                     name:  last_modified_by
+                     type:  varchar(100)
+
+                -  column:
+                     name:  last_modified_dt
+                     type:  datetime
+
+
+         -  createTable:
+              tableName:  tbl_employee
               columns:
                 -  column:
                      name:  id
@@ -14,20 +51,18 @@ databaseChangeLog:
                        primaryKey:  true
                        nullable:  false
                 -  column:
-                     name:  name
-                     type:  varchar(500)
-                -  column:
-                     name:  author
-                     type:  varchar(100)
-                -  column:
-                     name:  description
-                     type:  varchar(200)
+                     name:  address_id
+                     type:  long
+
                 -  column:
                      name:  version
                      type:  int
                 -  column:
                      name:  deleted
                      type:  bool
+                -  column:
+                     name:  createdBy
+                     type:  varchar(100)
                 -  column:
                      name:  creation_dt
                      type:  datetime
@@ -42,47 +77,12 @@ databaseChangeLog:
                 -  column:
                      name:  last_modified_dt
                      type:  datetime
-
-
          -  createTable:
-              tableName:  tbl_book_audit
+              tableName:  tbl_project_employee
               columns:
                 -  column:
-                     name:  id
+                     name:  project_id
                      type:  long
                 -  column:
-                     name:  rev
-                     type:  int
-                -  column:
-                     name:  revtype
-                     type:  int
-                -  column:
-                     name:  name
-                     type:  varchar(500)
-
-                -  column:
-                     name:  author
-                     type:  varchar(100)
-                -  column:
-                     name:  description
-                     type:  varchar(200)
-                -  column:
-                     name:  version
-                     type:  int
-                -  column:
-                     name:  deleted
-                     type:  bool
-                -  column:
-                     name:  creation_dt
-                     type:  datetime
-                -  column:
-                     name:  created_by
-                     type:  varchar(100)
-
-                -  column:
-                     name:  last_modified_by
-                     type:  varchar(100)
-
-                -  column:
-                     name:  last_modified_dt
-                     type:  datetime
+                     name:  employee_id
+                     type:  long
